@@ -17,7 +17,7 @@ Your mission is to build a secure delivery pipeline, implement GitOps, identify 
 
 ### Rules
 
-- Use free/open-source tools, preferably locally with Minikube, Kind, or K3d. No paid cloud infrastructure is required.
+- Use free/open-source tools, preferably locally with Minikube, Kind, or K3s. No paid cloud infrastructure is required (You are free to do it on a cloud infrastructure if you prefer). 
 - GitHub Actions and a free registry such as GHCR or Docker Hub are permitted.
 - Application changes are allowed, but existing functionality must continue to work.
 - Enforce security checks in CI/CD and implement Kubernetes runtime security controls.
@@ -60,7 +60,7 @@ Create a task via the API and verify it appears in the dashboard.
 |---|---|---|
 | Python linting | Flake8 / Ruff | No blocking lint errors |
 | Unit tests | pytest | All tests pass |
-| SAST | Bandit / Semgrep | No unresolved blocking findings |
+| SAST, SCA | Bandit / Semgrep | No unresolved blocking findings |
 | Secret scanning | Gitleaks (optional) | No exposed secrets |
 | Image vulnerability scanning | Trivy | No unresolved vulnerabilities above the defined threshold |
 | Container build | Docker Buildx | Build succeeds |
@@ -427,16 +427,6 @@ Demonstrate a code change progressing from PR to deployment, followed by a detec
 
 ## Changes from the Previous Assessment
 
-| Previous assessment | Revised assessment | Reason |
-|---|---|---|
-| Intentional memory leak | In-memory state inconsistency | Real limitation of new app |
-| OOMKilled at `400Mi` | Data loss and consistency investigation | Relevant application behavior |
-| Three image versions behind one Service | Multiple replicas of same release | Consistent application version |
-| Memory-leak monitoring | API latency, errors, availability, DB health | User-facing reliability |
-| Memory exhaustion alert | DB failures, crash loops, latency alerts | Realistic incidents |
-| Pod restart observation | Persistence across restarts and rollouts | Data durability |
-| Infrastructure-only monitoring | Infrastructure and application metrics | Better SRE coverage |
-| No load testing | k6/Locust, HPA, capacity planning | Scalability engineering |
 
 ## Recommended Delivery Sequence
 
